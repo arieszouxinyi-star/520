@@ -155,7 +155,7 @@ report:
 # 5) 这里决定“筛选路径”，不决定 AI 模型（模型在 ai 段）
 # ===============================================================
 filter:
-  method: "ai"                     # 可选: keyword | ai
+  method: "keyword"                     # 可选: keyword | ai
 
   # AI 模式标签排序开关（仅 ai 模式生效）
   # true: 按标签优先级排序（来自兴趣描述提取顺序）
@@ -214,27 +214,18 @@ ai_filter:
 # 5. 推送内容控制
 # ===============================================================
 display:
-  # 核心：打散平台，按关键词/全域排名展现
   mode: "keyword" 
-
-  # 显示顺序：先看 AI 总结，再看详细榜单
   region_order:
     - ai_analysis
     - hotlist
     - rss
-
-  # 视觉细节控制
   regions:
     hotlist: true
     rss: true
-    categories: false    # 🔴 关键：设为 false，彻底干掉“📌 教育”等分类标题
+    categories: false  # 🔴 关键：彻底干掉“📌 教育”等分类标题
     new_items: false
     standalone: false
-
-  # 排序逻辑
-  sort_by: "rank"        # 严格按 Top 1, Top 2 排序
-
-  # 日报模板：自定义你想要的每一行的样子
+  sort_by: "rank" 
   template: |
     {{rank}}. #{{title}}# ({{source_name}} Top {{rank}})
 # ===============================================================
