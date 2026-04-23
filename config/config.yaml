@@ -129,14 +129,13 @@ rss:
 report:
   mode: "current"                     # daily | current | incremental（schedule 开启时作为默认值）
 
-  display_mode: "keyword"             # 分组维度: keyword | platform
+  display_mode: "platform"             # 分组维度: keyword | platform
                                       # keyword: 按关键词分组显示（默认）
                                       # platform: 按平台/来源分组显示
 
   # 关键词模式分组排序方式（仅 keyword 模式生效）
   # true: 按 frequency_words.txt 的定义顺序排列
   # false: 按匹配到的热点条数排序（条数多的在前）
-  #sort_by_position_first: false
   sort_by: "rank"
 
   rank_threshold: 5                   # 排名高亮阈值（影响展示强调，不改变抓取范围）
