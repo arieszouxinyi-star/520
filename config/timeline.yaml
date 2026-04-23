@@ -397,36 +397,33 @@ presets:
 
 custom:
   name: "泛教育热点定时推送"
-  description: "每天 10-12点, 14-18点 每整点准时推送"
+  description: "每天 10-18点 宽限模式"
 
-  # 1. 默认配置：基础行为定义
   default:
     collect: true
     analyze: false
-    push: false
+    push: false           # 非指定时间段不推送
     report_mode: "current"
     ai_mode: "current"
     once:
       analyze: true
-      push: true  # 确保每个定义的时段内只推送一次，防止重复触发
+      push: true          # 这个非常关键，保证一小时只推一次
 
-  # 2. 定义时间积木块 (Periods)
   periods:
-    p10: { start: "10:00", end: "10:55", push: true }
-    p11: { start: "11:00", end: "11:55", push: true }
-    p12: { start: "12:00", end: "12:55", push: true }
-    p14: { start: "14:00", end: "14:55", push: true }
-    p15: { start: "15:00", end: "15:55", push: true }
-    p16: { start: "16:00", end: "16:55", push: true }
-    p17: { start: "17:00", end: "17:55", push: true }
-    p18: { start: "18:00", end: "18:55", push: true }
+    # 将 end 改为 59，确保无论 Actions 在这小时的哪一分钟运行都能撞进这个“桶”里
+    p10: { start: "10:00", end: "10:59", push: true }
+    p11: { start: "11:00", end: "11:59", push: true }
+    p12: { start: "12:00", end: "12:59", push: true }
+    p14: { start: "14:00", end: "14:59", push: true }
+    p15: { start: "15:00", end: "15:59", push: true }
+    p16: { start: "16:00", end: "16:59", push: true }
+    p17: { start: "17:00", end: "17:59", push: true }
+    p18: { start: "18:00", end: "18:59", push: true }
 
-  # 3. 组装日计划 (Day Plans)
   day_plans:
     edu_push_plan:
       periods: ["p10", "p11", "p12", "p14", "p15", "p16", "p17", "p18"]
 
-  # 4. 应用到全周 (Week Map)
   week_map:
     1: "edu_push_plan"
     2: "edu_push_plan"
@@ -435,7 +432,3 @@ custom:
     5: "edu_push_plan"
     6: "edu_push_plan"
     7: "edu_push_plan"
-
-  # 5. 冲突处理策略
-  overlap:
-    policy: "error_on_overlap"
